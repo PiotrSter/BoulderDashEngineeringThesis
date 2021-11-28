@@ -8,7 +8,7 @@ public class RockBehavior : MonoBehaviour
     public float speed;
     public bool canMoveLeftRight, canMoveUpDown;
 
-    Vector2 movement; 
+    public Vector2 movement; 
     PlayerMovment playerMovment;
 
     Rigidbody2D rb;
@@ -24,16 +24,26 @@ public class RockBehavior : MonoBehaviour
 
     void Update()
     {
-        if (playerMovment.canLeftRightMove)
+        if (playerMovment.canLeftRightMove && canMoveLeftRight)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = 0;
         }
+        else
+        {
+            movement.x = 0;
+            movement.y = 0;
+        }
 
-        if (playerMovment.canUpDownMove)
+        if (playerMovment.canUpDownMove && canMoveUpDown)
         {
             movement.x = 0;
             movement.y = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            movement.x = 0;
+            movement.y = 0;
         }
     }
 
@@ -45,7 +55,12 @@ public class RockBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.collider.CompareTag("Rock"))
+        {
+            canMoveLeftRight = false;
+            canMoveUpDown = false;
+            Debug.Log("Ska³y");
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
