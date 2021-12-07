@@ -14,6 +14,6 @@ public class CameraBehavior : MonoBehaviour
 
     void Update()
     {
-        cameraPosition.position = new Vector3(playerPosition.position.x, playerPosition.position.y + 2.5f, cameraPosition.position.z);
+        cameraPosition.position = new Vector3(playerPosition.position.x, playerPosition.position.y, cameraPosition.position.z);
     }
 }
