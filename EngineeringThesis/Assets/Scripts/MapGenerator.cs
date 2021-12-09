@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour
     public int borderGenerator = 0;
     public Transform playerTransform;
     float xPosition, yPosition;
+    GameManager gm;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class MapGenerator : MonoBehaviour
         playerTransform.position = new Vector3(-9.36f, 4.84f, playerTransform.position.z);
         xPosition = -9.36f; 
         yPosition = 4.84f;
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -68,10 +70,19 @@ public class MapGenerator : MonoBehaviour
     void TerrainGenerate()
     {
         int randomeObjectNumber;
-        
-        randomeObjectNumber = Random.Range(0, 3);
+       
         if (xPosition <= 9.36f)
-            Instantiate(tabOfMapObject[randomeObjectNumber], new Vector3(xPosition, yPosition, 0), Quaternion.identity, Map);
+        {
+            if (gm.howManyCoin < 10)
+                randomeObjectNumber = Random.Range(0, 3);
+            else
+                randomeObjectNumber = Random.Range(1, 3);
+            GameObject randomeObject;
+            randomeObject = Instantiate(tabOfMapObject[randomeObjectNumber], new Vector3(xPosition, yPosition, 0), Quaternion.identity, Map);
+            if (randomeObject.CompareTag("Coin"))
+                gm.howManyCoin++;
+
+        }
         xPosition += 0.64f;
         if (xPosition > 9.36f)
         {

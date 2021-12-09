@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CoinBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameManager gm;
+
+    private void Awake()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     void Start()
     {
         
@@ -20,7 +25,7 @@ public class CoinBehavior : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            //gm.coin++; tutaj dodawanie coinów bedzie, jeœli wszystkie coiny siê zbierze to otworzy sieprzejœcei na next lvl
+            gm.howManyCoin--;
             Destroy(this.gameObject);
         }
     }
