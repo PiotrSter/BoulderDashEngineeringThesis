@@ -1,93 +1,71 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public GameObject[] tabOfMapObject = new GameObject[3];
-    public GameObject boundar;
+    public GameObject[] mapObjects = new GameObject[3];
+    public GameObject borderPrefab;
     public Transform Map;
-    public int borderGenerator = 0;
     public Transform playerTransform;
-    float xPosition, yPosition;
+    public int sizeX = 30;
+    public int sizeY = 16;
+    public float width = .64f;
     GameManager gm;
 
     private void Awake()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-        playerTransform.position = new Vector3(-9.36f, 4.84f, playerTransform.position.z);
-        xPosition = -9.36f; 
-        yPosition = 4.84f;
+        Vector2 playerSpriteSize = playerTransform.GetComponent<SpriteRenderer>().size;
+        playerTransform.position = new Vector3(-(sizeX / 2 * width) + playerSpriteSize.x / 2, sizeY / 2 * width - playerSpriteSize.y / 2, playerTransform.position.z);
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    private void Start()
+    {
+        BorderGenerate();
+        TerrainGenerate();
     }
 
     private void Update()
     {
-        if (borderGenerator <= 3)
-            BorderGenerate();
 
-        while (yPosition >= -4.84f)
-        {
-            TerrainGenerate();
-        }
     }
 
     void BorderGenerate()
     {
-        switch (borderGenerator)
-        {
-            case 0:
-                GameObject leftWall;
-                leftWall = Instantiate(boundar, new Vector3(-10f, 0, 0), Quaternion.identity, Map);
-                leftWall.GetComponent<SpriteRenderer>().size = new Vector2(0.64f, 10.48f);
-                leftWall.GetComponent<BoxCollider2D>().size = new Vector2(0.64f, 10.48f);
-                borderGenerator++;
-                break;
-            case 1:
-                GameObject upWall;
-                upWall = Instantiate(boundar, new Vector3(0, 5.48f, 0), Quaternion.identity, Map);
-                upWall.GetComponent<SpriteRenderer>().size = new Vector2(20.64f, 0.64f);
-                upWall.GetComponent<BoxCollider2D>().size = new Vector2(20.64f, 0.64f);
-                borderGenerator++;
-                break;
-            case 2:
-                GameObject rightWall;
-                rightWall = Instantiate(boundar, new Vector3(10f, 0, 0), Quaternion.identity, Map);
-                rightWall.GetComponent<SpriteRenderer>().size = new Vector2(0.64f, 10.48f);
-                rightWall.GetComponent<BoxCollider2D>().size = new Vector2(0.64f, 10.48f);
-                borderGenerator++;
-                break;
-            case 3:
-                GameObject downWall;
-                downWall = Instantiate(boundar, new Vector3(0, -5.48f, 0), Quaternion.identity, Map);
-                downWall.GetComponent<SpriteRenderer>().size = new Vector2(20.64f, 0.64f);
-                downWall.GetComponent<BoxCollider2D>().size = new Vector2(20.64f, 0.64f);
-                borderGenerator++;
-                break;
-        }
+        float borderWidth = width * (sizeX + 2);
+        float borderHeight = width * sizeY;
+
+        GameObject border = Instantiate(borderPrefab, new Vector2(0.0f, sizeY / 2 * width + width / 2), Quaternion.identity, Map);
+        border.GetComponent<SpriteRenderer>().size = new Vector2(borderWidth, width);
+        border.GetComponent<BoxCollider2D>().size = new Vector2(borderWidth, width);
+
+        border = Instantiate(borderPrefab, new Vector2(sizeX / 2 * width + width / 2, 0.0f), Quaternion.identity, Map);
+        border.GetComponent<SpriteRenderer>().size = new Vector2(width, borderHeight);
+        border.GetComponent<BoxCollider2D>().size = new Vector2(width, borderHeight);
+
+        border = Instantiate(borderPrefab, new Vector2(0.0f, -(sizeY / 2 * width + width / 2)), Quaternion.identity, Map);
+        border.GetComponent<SpriteRenderer>().size = new Vector2(borderWidth, width);
+        border.GetComponent<BoxCollider2D>().size = new Vector2(borderWidth, width);
+
+        border = Instantiate(borderPrefab, new Vector2(-(sizeX / 2 * width + width / 2), 0.0f), Quaternion.identity, Map);
+        border.GetComponent<SpriteRenderer>().size = new Vector2(width, borderHeight);
+        border.GetComponent<BoxCollider2D>().size = new Vector2(width, borderHeight);
     }
 
     void TerrainGenerate()
     {
-        int randomeObjectNumber;
-       
-        if (xPosition <= 9.36f)
+        for(int x = -(sizeX / 2); x < sizeX / 2; x++)
         {
-            if (gm.howManyCoin < 10)
-                randomeObjectNumber = Random.Range(0, 3);
-            else
-                randomeObjectNumber = Random.Range(1, 3);
-            GameObject randomeObject;
-            randomeObject = Instantiate(tabOfMapObject[randomeObjectNumber], new Vector3(xPosition, yPosition, 0), Quaternion.identity, Map);
-            if (randomeObject.CompareTag("Coin"))
-                gm.howManyCoin++;
+            for(int y = -(sizeY / 2); y < sizeY / 2; y++)
+            {
+                if(x == -(sizeX / 2) && y == sizeY / 2 - 1)
+                {
+                    continue;
+                }
 
-        }
-        xPosition += 0.64f;
-        if (xPosition > 9.36f)
-        {
-            yPosition -= 0.64f;
-            xPosition = -9.36f;
+                int randomObjectNumber = Random.Range(0, mapObjects.Length);
+                Instantiate(mapObjects[randomObjectNumber], new Vector2(x * width + width / 2, y * width + width / 2), Quaternion.identity, Map);
+            }
         }
     }
 }

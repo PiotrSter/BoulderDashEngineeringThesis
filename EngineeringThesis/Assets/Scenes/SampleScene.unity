@@ -136,7 +136,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23069399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.53502154, y: 0.40980178, z: -454.8578}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -523,14 +523,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a831f25cb7b206340988671d36c01ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabOfMapObject:
+  mapObjects:
   - {fileID: 214884637268773897, guid: 8ae84c3b3da006545af1ab6c47a44fd3, type: 3}
   - {fileID: 4262407124552895920, guid: 58d101f26aca9ca43bf7d1b44bbb24fe, type: 3}
   - {fileID: 1822562717647952027, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
-  boundar: {fileID: 5199120247029452158, guid: 574a15be5d8588948a3f38fa69a3a8d5, type: 3}
+  borderPrefab: {fileID: 5199120247029452158, guid: 574a15be5d8588948a3f38fa69a3a8d5, type: 3}
   Map: {fileID: 1580537881}
-  borderGenerator: 0
   playerTransform: {fileID: 0}
+  sizeX: 30
+  sizeY: 16
+  width: 0.64
 --- !u!4 &1525645723
 Transform:
   m_ObjectHideFlags: 0
@@ -539,7 +541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525645721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.233137, y: -0.17385441, z: -41.873184}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -557,7 +559,7 @@ GameObject:
   m_Layer: 0
   m_Name: MapObjects
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
