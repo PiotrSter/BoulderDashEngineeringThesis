@@ -41,6 +41,22 @@ public class PlayerMovment : MonoBehaviour
             movement.y = Input.GetAxisRaw("Vertical");
         }
 
+        /*if (Input.GetKeyDown(KeyCode.A))
+            rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
+
+        if (Input.GetKeyDown(KeyCode.D))
+            rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
+
+        if (Input.GetKeyDown(KeyCode.W))
+            rb.position = new Vector2(rb.position.x, rb.position.y + 0.64f);
+
+        if (Input.GetKeyDown(KeyCode.S))
+            rb.position = new Vector2(rb.position.x, rb.position.y - 0.64f);*/
+
+        //Sterowanie jako przeksakiwanie o "ca³¹ kratkê"
+
+
+
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);

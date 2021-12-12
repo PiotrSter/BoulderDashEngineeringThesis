@@ -6,7 +6,7 @@ using UnityEngine;
 public class RockBehavior : MonoBehaviour
 {
     public float speed;
-    public bool canMoveLeftRight, canMoveUpDown;
+    public bool canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
 
     public Vector2 movement; 
     PlayerMovment playerMovment;
@@ -17,39 +17,31 @@ public class RockBehavior : MonoBehaviour
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         speed = 1f;
-        canMoveLeftRight = false;
-        canMoveUpDown = false;
+        canMoveLeft = false;
+        canMoveRight = false;
+        canMoveUp = false;
+        canMoveDown = false;
         playerMovment = GameObject.Find("Player").GetComponent<PlayerMovment>();
     }
 
     void Update()
     {
-        if (playerMovment.canLeftRightMove && canMoveLeftRight)
+        if (canMoveLeft || canMoveRight)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = 0;
         }
-        else
-        {
-            movement.x = 0;
-            movement.y = 0;
-        }
 
-        if (playerMovment.canUpDownMove && canMoveUpDown)
+        if (canMoveUp || canMoveDown)
         {
             movement.x = 0;
             movement.y = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            movement.x = 0;
-            movement.y = 0;
         }
     }
 
     void FixedUpdate()
     {
-        if (canMoveLeftRight || canMoveUpDown)
+        if (canMoveLeft || canMoveRight || canMoveDown || canMoveUp)
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
@@ -57,8 +49,10 @@ public class RockBehavior : MonoBehaviour
     {
         if (collision.collider.CompareTag("Rock"))
         {
-            canMoveLeftRight = false;
-            canMoveUpDown = false;
+            canMoveLeft = false;
+            canMoveRight = false;
+            canMoveUp = false;
+            canMoveDown = false;
             Debug.Log("Ska³y");
         }
     }

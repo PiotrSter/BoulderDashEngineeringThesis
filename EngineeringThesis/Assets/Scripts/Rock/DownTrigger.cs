@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeftRightTrigger : MonoBehaviour
+public class DownTrigger : MonoBehaviour
 {
     RockBehavior rockBehavior;
     Rigidbody2D rb;
@@ -16,8 +16,8 @@ public class LeftRightTrigger : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            rockBehavior.canMoveLeftRight = true;
-            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            rockBehavior.canMoveUp = true;
+            //rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
 
@@ -25,8 +25,8 @@ public class LeftRightTrigger : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            rockBehavior.canMoveLeftRight = false;
-            rb.constraints = RigidbodyConstraints2D.None;
+            rockBehavior.canMoveUp = false;
+            //rb.constraints = RigidbodyConstraints2D.None;
         }
     }
 }
