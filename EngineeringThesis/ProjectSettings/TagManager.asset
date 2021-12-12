@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Rock
   - Coin
+  - Boundar
+  - Dirt
   layers:
   - Default
   - TransparentFX
