@@ -14,12 +14,32 @@ public class PlayerDownTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dirt"))
+        {
             playerMovment.canMoveDown = true;
+            Debug.Log($"{this.name} {collision.name}");
+        }
 
         if (collision.CompareTag("Boundar"))
+        {
             playerMovment.canMoveDown = false;
+            Debug.Log($"{this.name} {collision.name}");
+        }
 
         if (collision.CompareTag("Coin"))
+        {
+            playerMovment.canMoveDown = true;
+            Debug.Log($"{this.name} {collision.name}");
+        }
+
+        if (collision.CompareTag("Rock"))
+        {
+            Debug.Log($"{this.name} {collision.name}");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boundar"))
             playerMovment.canMoveDown = true;
     }
 }

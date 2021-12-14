@@ -14,12 +14,39 @@ public class PlayerRightTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dirt"))
+        {
             playerMovment.canMoveRight = true;
+            Debug.Log($"{this.name} {collision.name}");
+        }
 
         if (collision.CompareTag("Boundar"))
+        {
             playerMovment.canMoveRight = false;
+            Debug.Log($"{this.name} {collision.name}");
+        }
 
         if (collision.CompareTag("Coin"))
+        {
             playerMovment.canMoveRight = true;
+            Debug.Log($"{this.name} {collision.name}");
+        }
+
+        if (collision.CompareTag("Rock"))
+        {
+            playerMovment.isRockOnRight = true;
+            Debug.Log($"{this.name} {collision.name}");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Boundar"))
+            playerMovment.canMoveRight = true;
+
+        if (collision.CompareTag("Rock"))
+        {
+            playerMovment.isRockOnRight = false;
+            playerMovment.canMoveRockToRight = false;
+        }
     }
 }
