@@ -33,6 +33,7 @@ public class PlayerDownTrigger : MonoBehaviour
 
         if (collision.CompareTag("Rock"))
         {
+            playerMovment.canMoveDown = false;
             Debug.Log($"{this.name} {collision.name}");
         }
     }
@@ -40,6 +41,9 @@ public class PlayerDownTrigger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Boundar"))
+            playerMovment.canMoveDown = true;
+
+        if (collision.CompareTag("Rock"))
             playerMovment.canMoveDown = true;
     }
 }

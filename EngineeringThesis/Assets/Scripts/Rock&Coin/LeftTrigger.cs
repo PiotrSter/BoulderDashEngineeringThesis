@@ -15,16 +15,28 @@ public class LeftTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dirt"))
+        {
             rockBehavior.canMoveLeft = false;
+            rockBehavior.playerMovment.canMoveRockToLeft = false;       
+        }
 
         if (collision.CompareTag("Rock"))
+        {
             rockBehavior.canMoveLeft = false;
+            rockBehavior.playerMovment.canMoveRockToLeft = false;
+        }
 
         if (collision.CompareTag("Coin"))
+        {
             rockBehavior.canMoveLeft = false;
+            rockBehavior.playerMovment.canMoveRockToLeft = false;
+        }
 
         if (collision.CompareTag("Boundar"))
-            rockBehavior.canMoveLeft = false;            
+        {
+            rockBehavior.canMoveLeft = false;
+            rockBehavior.playerMovment.canMoveRockToLeft = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

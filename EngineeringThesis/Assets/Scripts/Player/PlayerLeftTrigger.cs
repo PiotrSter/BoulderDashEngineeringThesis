@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLeftTrigger : MonoBehaviour
 {
     PlayerMovment playerMovment;
+    RockBehavior rockBehavior;
 
     void Awake()
     {
@@ -33,7 +34,11 @@ public class PlayerLeftTrigger : MonoBehaviour
 
         if (collision.CompareTag("Rock"))
         {
-            playerMovment.isRockOnLeft = true;
+            playerMovment.rockRbLeft = collision.GetComponent<Rigidbody2D>();
+            rockBehavior = collision.GetComponent<RockBehavior>();
+            if (rockBehavior.canMoveLeft)
+                playerMovment.canMoveRockToLeft = true;
+            playerMovment.canMoveLeft = false;
             Debug.Log($"{this.name} {collision.name}");
         }
     }
@@ -45,8 +50,9 @@ public class PlayerLeftTrigger : MonoBehaviour
 
         if (collision.CompareTag("Rock"))
         {
-            playerMovment.isRockOnLeft = false;
+            playerMovment.canMoveLeft = true;
             playerMovment.canMoveRockToLeft = false;
+            playerMovment.isRockOnLeft = false;
         }
     }
 }

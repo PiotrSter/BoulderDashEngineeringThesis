@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovment : MonoBehaviour
 {
     public float playerSpeed;
-    public Rigidbody2D rb;
+    public Rigidbody2D rb, rockRbLeft, rockRbRight;
     public bool canMoveLeft, canMoveRight, canMoveUp, canMoveDown, isRockOnLeft, isRockOnRight, canMoveRockToLeft, canMoveRockToRight;
     public Animator animator;
     
@@ -17,6 +17,8 @@ public class PlayerMovment : MonoBehaviour
         canMoveRight = true;
         canMoveDown = true;
         canMoveUp = true;
+        canMoveRockToLeft = false;
+        canMoveRockToRight = false;
         isRockOnLeft = false;
         isRockOnRight = false;
     }
@@ -24,20 +26,28 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A) && canMoveLeft)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
+            if (canMoveRockToLeft)
+            {
+                rockRbLeft.position = new Vector2(rockRbLeft.position.x - 0.64f, rockRbLeft.position.y);
+                rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
+            }
 
-            if (isRockOnLeft)
-                canMoveRockToLeft = true;
+            if (canMoveLeft)
+                rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && canMoveRight)
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
+            if (canMoveRockToRight)
+            {
+                rockRbRight.position = new Vector2(rockRbRight.position.x + 0.64f, rockRbRight.position.y);
+                rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
+            }
 
-            if (isRockOnRight)
-                canMoveRockToRight = true;
+            if (canMoveRight)
+                rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
         }
 
         if (Input.GetKeyDown(KeyCode.W) && canMoveUp)
