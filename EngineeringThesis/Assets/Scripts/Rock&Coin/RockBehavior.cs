@@ -29,15 +29,30 @@ public class RockBehavior : MonoBehaviour
     {
 
         if (canMoveLeft && canRockOrCoinDown)
-            rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
+            MoveLeft();
 
         if (canMoveRight && canRockOrCoinDown)
-            rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
+            MoveRight();
 
         /*if (canMoveUp)
             rb.position = new Vector2(rb.position.x, rb.position.y + 0.64f);*/
 
         if (canMoveDown)
-            rb.position = new Vector2(rb.position.x, rb.position.y - 0.64f);
+            MoveDown();
+    }
+
+    public void MoveLeft()
+    {
+        rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
+    }
+
+    public void MoveRight()
+    {
+        rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
+    }
+
+    public void MoveDown()
+    {
+        rb.position = new Vector2(rb.position.x, rb.position.y - 0.64f);
     }
 }

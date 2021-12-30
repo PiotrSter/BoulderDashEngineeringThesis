@@ -34,7 +34,7 @@ public class PlayerRightTrigger : MonoBehaviour
 
         if (collision.CompareTag("Rock"))
         {
-            playerMovment.rockRbRight = collision.GetComponent<Rigidbody2D>();
+            playerMovment.rockRight = collision.GetComponent<RockBehavior>();
             rockBehavior = collision.GetComponent<RockBehavior>();
             if (rockBehavior.canMoveRight)
                 playerMovment.canMoveRockToRight = true;

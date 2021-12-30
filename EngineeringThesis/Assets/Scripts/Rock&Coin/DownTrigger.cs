@@ -31,12 +31,18 @@ public class DownTrigger : MonoBehaviour
 
         if (collision.CompareTag("Boundar"))
             rockBehavior.canMoveDown = false;
+
+        /*if (collision.gameObject is null)
+        {
+            Debug.Log("Nic");
+            rockBehavior.canMoveDown = true;
+        }*/
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Dirt"))
-            rockBehavior.canMoveDown = true;
+        *//*if (collision.CompareTag("Dirt"))
+            rockBehavior.canMoveDown = true;*//*
 
         if (collision.CompareTag("Rock"))
         {
@@ -50,7 +56,17 @@ public class DownTrigger : MonoBehaviour
             rockBehavior.canRockOrCoinDown = false;
         }
 
-        if (collision.CompareTag("Boundar"))
+        *//*if (collision.CompareTag("Boundar"))
+            rockBehavior.canMoveDown = true;*//*
+
+        if (!collision)
             rockBehavior.canMoveDown = true;
-    }
+    }*/
+
+
+    /* Nie dzia³a, bo wychodzi z dirta i zaczyna spadaæ zanim wy³apie ¿e jest pod nim kolejny dirt.
+       Pomys³y na rozwi¹zanie:
+       1. OpuŸniæ spadanie, podobnie jak Maciej robi³ z tym czekaniem
+       2. Spróbowac jakoœ wykrywaæ wejœcie w "brak obiektu"
+     */
 }

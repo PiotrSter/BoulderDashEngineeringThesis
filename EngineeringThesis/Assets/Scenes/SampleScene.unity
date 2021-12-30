@@ -554,6 +554,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8144968392331082465, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
 --- !u!1 &519420028
@@ -863,8 +867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 2
   rb: {fileID: 0}
-  rockRbLeft: {fileID: 0}
-  rockRbRight: {fileID: 0}
+  rockLeft: {fileID: 0}
+  rockRight: {fileID: 0}
   canMoveLeft: 0
   canMoveRight: 0
   canMoveUp: 0
@@ -1219,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8144968392331082465, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
 --- !u!1 &1972875210
@@ -1482,6 +1490,10 @@ PrefabInstance:
     - target: {fileID: 1822562717647952027, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
       propertyPath: m_Name
       value: Rock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144968392331082465, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}

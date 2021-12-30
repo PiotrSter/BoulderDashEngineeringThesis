@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovment : MonoBehaviour
 {
     public float playerSpeed;
-    public Rigidbody2D rb, rockRbLeft, rockRbRight;
+    public Rigidbody2D rb; /*rockRbLeft, rockRbRight;*/
+    public RockBehavior rockLeft, rockRight;
     public bool canMoveLeft, canMoveRight, canMoveUp, canMoveDown, isRockOnLeft, isRockOnRight, canMoveRockToLeft, canMoveRockToRight;
     public Animator animator;
     
@@ -30,7 +31,7 @@ public class PlayerMovment : MonoBehaviour
         {
             if (canMoveRockToLeft)
             {
-                rockRbLeft.position = new Vector2(rockRbLeft.position.x - 0.64f, rockRbLeft.position.y);
+                rockLeft.MoveLeft();
                 rb.position = new Vector2(rb.position.x - 0.64f, rb.position.y);
             }
 
@@ -42,7 +43,7 @@ public class PlayerMovment : MonoBehaviour
         {
             if (canMoveRockToRight)
             {
-                rockRbRight.position = new Vector2(rockRbRight.position.x + 0.64f, rockRbRight.position.y);
+                rockRight.MoveRight();
                 rb.position = new Vector2(rb.position.x + 0.64f, rb.position.y);
             }
 
