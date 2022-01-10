@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Boundar
   - Dirt
+  - EmptySpace
   layers:
   - Default
   - TransparentFX
@@ -15,11 +16,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Dirt
+  - Border
+  - RockOrCoin
+  - Player
+  - StopRockMovment
   - 
   - 
   - 

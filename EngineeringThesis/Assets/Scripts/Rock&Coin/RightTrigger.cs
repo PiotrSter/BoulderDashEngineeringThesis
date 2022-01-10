@@ -12,7 +12,7 @@ public class RightTrigger : MonoBehaviour
         rb = gameObject.GetComponentInParent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dirt"))
         {
@@ -52,5 +52,5 @@ public class RightTrigger : MonoBehaviour
 
         if (collision.CompareTag("Boundar"))
             rockBehavior.canMoveRight = true;
-    }
+    }*/
 }

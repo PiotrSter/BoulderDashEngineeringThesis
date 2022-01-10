@@ -16,25 +16,25 @@ public class PlayerUpTrigger : MonoBehaviour
         if (collision.CompareTag("Dirt"))
         {
             playerMovment.canMoveUp = true;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Boundar"))
         {
             playerMovment.canMoveUp = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Coin"))
         {
             playerMovment.canMoveUp = true;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Rock"))
         {
             playerMovment.canMoveUp = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
     }
 

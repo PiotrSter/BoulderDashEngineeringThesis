@@ -17,29 +17,29 @@ public class PlayerRightTrigger : MonoBehaviour
         if (collision.CompareTag("Dirt"))
         {
             playerMovment.canMoveRight = true;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Boundar"))
         {
             playerMovment.canMoveRight = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Coin"))
         {
             playerMovment.canMoveRight = true;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Rock"))
         {
             playerMovment.rockRight = collision.GetComponent<RockBehavior>();
             rockBehavior = collision.GetComponent<RockBehavior>();
-            if (rockBehavior.canMoveRight)
-                playerMovment.canMoveRockToRight = true;
+            /*if (rockBehavior.canMoveRight)
+                playerMovment.canMoveRockToRight = true;*/
             playerMovment.canMoveRight = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
     }
 
@@ -55,4 +55,6 @@ public class PlayerRightTrigger : MonoBehaviour
             playerMovment.isRockOnRight = false;
         }
     }
+
+    
 }

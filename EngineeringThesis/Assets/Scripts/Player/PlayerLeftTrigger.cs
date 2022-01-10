@@ -17,29 +17,29 @@ public class PlayerLeftTrigger : MonoBehaviour
         if (collision.CompareTag("Dirt"))
         {
             playerMovment.canMoveLeft = true;
-            Debug.Log($"{this.name} {collision.name}");
+           // Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Boundar"))
         {
             playerMovment.canMoveLeft = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Coin"))
         {
             playerMovment.canMoveLeft = true;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
 
         if (collision.CompareTag("Rock"))
         {
             playerMovment.rockLeft = collision.GetComponent<RockBehavior>();
             rockBehavior = collision.GetComponent<RockBehavior>();
-            if (rockBehavior.canMoveLeft)
-                playerMovment.canMoveRockToLeft = true;
+            /*if (rockBehavior.canMoveLeft)
+                playerMovment.canMoveRockToLeft = true;*/
             playerMovment.canMoveLeft = false;
-            Debug.Log($"{this.name} {collision.name}");
+            //Debug.Log($"{this.name} {collision.name}");
         }
     }
 
