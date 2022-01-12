@@ -149,21 +149,22 @@ MonoBehaviour:
   orginalPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 3
-  isRockOrCoinDown: 0
   canMoveLeft: 0
   canMoveRight: 0
-  isMoving: 0
+  isMovingDown: 0
+  test: 0
   rockMovePoint: {fileID: 3675400993094692827}
   rockLayer:
     serializedVersion: 2
     m_Bits: 256
-  canMoveSide:
-  - RockOrCoin
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  layers:
   - Dirt
-  - Border
+  - Rock
   - Player
-  canMoveDown:
-  - Dirt
+  - Coin
   - Border
 --- !u!1 &2886030816350260024
 GameObject:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
-    public bool isMoving;
+    public bool canMoveDown, canMoveUp;
     public Vector3 orginalPosition, targetPosition;
     public float moveSpeed = 3f;
     public Transform movePoint;
@@ -28,6 +28,7 @@ public class PlayerMovment : MonoBehaviour
 
         if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
         {
+            //Debug.Log("Gracz");
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
@@ -52,7 +53,7 @@ public class PlayerMovment : MonoBehaviour
             }
             else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopedMovment))
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, rockLayer))
                     movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
             }
 

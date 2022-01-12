@@ -7,11 +7,11 @@ public class RockBehavior : MonoBehaviour
 {
     public Vector3 orginalPosition, targetPosition;
     public float moveSpeed = 3f;
-    public bool  isRockOrCoinDown, canMoveLeft, canMoveRight, isMovingDown, isMoving;
+    public bool canMoveLeft, canMoveRight, isMovingDown, test;
     public Transform rockMovePoint;
-    public LayerMask rockLayer;
-    public string[] canMoveSide = new string[] { "Rock", "Dirt", "Player", "Coin", "Border" }; //rock w getmask, nie mo¿e wykryæ layer "Rock" mo¿liwe ¿e to przez to ¿e jakby MoveLeft/Right ca³y czas sie wywo³ywa³o
-    public string[] canMoveDown = new string[] { "Dirt", "Rock", "Player", "Coin", "Border" };
+    public LayerMask rockLayer, playerLayer;
+    public string[] layers = new string[] { "Dirt", "Rock", "Player", "Coin", "Border" };
+    GameManager gm;
 
     void Start()
     {
@@ -20,64 +20,80 @@ public class RockBehavior : MonoBehaviour
 
     void Awake()
     {
-        //isMovingDown = true;
-        isRockOrCoinDown = false;
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    void Update() //ogarn¹æ te przemieszczanie, ¿eby nie sprawdza³ pozycji co klatke, tylko gdy ju¿ jest na pozycji to nie sprawdza, sprawdza dopiero w momencie gdy chcemy ¿eby kamieñ siê przesuwa³
+    void Update() 
     {
         transform.position = Vector3.MoveTowards(transform.position, rockMovePoint.position, moveSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, rockMovePoint.position) <= .05f)
         {
-            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, 0f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, 0f, 0f), .2f, LayerMask.GetMask(layers)))
                 canMoveLeft = true;
             else
                 canMoveLeft = false;
 
-            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, 0f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, 0f, 0f), .2f, LayerMask.GetMask(layers)))
                 canMoveRight = true;
             else
                 canMoveRight = false;
+
+            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
+                test = true;
 
             if (Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, rockLayer))
             {
                 if (canMoveLeft && canMoveRight)
                 {
-                    if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                    if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
                     {
-                        Debug.Log("Lewa wolna");
                         MoveLeft();
                     }
-                    else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                    else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
                         MoveRight();
                 }
                 else
                 {
                     if (canMoveLeft)
                     {
-                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
                         {
-                            Debug.Log(Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide))); //przy pchaniu kamienia, jeœli jest on na kamieniu, to po skosie wykrywa null
+                            Debug.Log(Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(layers))); 
                             MoveLeft();
                         }
                     }
                     else if (canMoveRight)
                     {
-                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
                             MoveRight();
                     }
                 }
             }
 
-            else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(canMoveDown)))
+            else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
+            {
                 MoveDown();
+                /*isMovingDown = true;
+                StartCoroutine("WaitToRockFall");*/
+            }
+
+            else if (Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, playerLayer) && isMovingDown)
+                gm.gameOver = true;
 
             else
                 isMovingDown = false;
 
         }
     }
+
+    /*void LateUpdate()
+    {
+        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
+            isMovingDown = true;
+        else
+            isMovingDown = false;
+    }*/
 
     public void MoveLeft()
     {
@@ -100,8 +116,14 @@ public class RockBehavior : MonoBehaviour
 
     /*IEnumerator WaitToRockFall()
     {
-        Debug.Log("Czekaj");
-        yield return new WaitForSeconds(2f);
+        while (isMovingDown)
+        {
+            yield return new WaitForSeconds(.3f);
+            MoveDown();
+            Debug.Log("Czekaj");
+            if (Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
+                isMovingDown = false;
+        }
     }*/
 
     private void OnDrawGizmos()
