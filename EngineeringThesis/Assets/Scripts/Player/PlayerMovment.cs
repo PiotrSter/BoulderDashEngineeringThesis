@@ -6,9 +6,8 @@ public class PlayerMovment : MonoBehaviour
 {
     public bool isMoving;
     public Vector3 orginalPosition, targetPosition;
-    public float timeToMove = 0.2f, moveSpeed = 3f;
+    public float moveSpeed = 3f;
     public Transform movePoint;
-    public Rigidbody2D rb; 
     public RockBehavior rockHorizontal;
     public Animator animator;
     public LayerMask whatStopedMovment, rockLayer;
@@ -20,7 +19,6 @@ public class PlayerMovment : MonoBehaviour
 
     void Awake()
     {
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
     }
 
@@ -37,9 +35,9 @@ public class PlayerMovment : MonoBehaviour
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                 }
 
-                if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer)) //tu naprawiæ, ob czasem przesuwa kamieñ, który jest o 2 bloki dalej
+                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer)) 
                 {
-                    rockHorizontal = Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer).GetComponent<RockBehavior>();
+                    rockHorizontal = Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer).GetComponent<RockBehavior>(); //tutaj nie wiem czy nie trzeba tego przerobiæ, ¿eby GetComponent nie by³o w update
                     if (Input.GetAxisRaw("Horizontal") == -1 && rockHorizontal.canMoveLeft)
                     {
                         rockHorizontal.MoveLeft();
@@ -50,8 +48,6 @@ public class PlayerMovment : MonoBehaviour
                         rockHorizontal.MoveRight();
                         movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                     }
-
-                    //movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                 }
             }
             else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)

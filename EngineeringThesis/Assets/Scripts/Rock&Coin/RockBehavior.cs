@@ -6,17 +6,12 @@ using UnityEngine;
 public class RockBehavior : MonoBehaviour
 {
     public Vector3 orginalPosition, targetPosition;
-    public float timeToMove = 0.2f, moveSpeed = 3f;
-    public bool  isRockOrCoinDown, canMoveLeft, canMoveRight;
+    public float moveSpeed = 3f;
+    public bool  isRockOrCoinDown, canMoveLeft, canMoveRight, isMovingDown, isMoving;
     public Transform rockMovePoint;
-    public LayerMask coinOrRockLayer, dirtLayer, borderLayer, playerLayer;
-    public string[] canMoveSide = new string[] { "RockOrCoin", "Dirt", "Border", "Player" };
-    public string[] canMoveDown = new string[] { "Dirt", "Border" };
-
-    public Vector2 movement;
-    public PlayerMovment playerMovment;
-
-    Rigidbody2D rb;
+    public LayerMask rockLayer;
+    public string[] canMoveSide = new string[] { "Rock", "Dirt", "Player", "Coin", "Border" }; //rock w getmask, nie mo¿e wykryæ layer "Rock" mo¿liwe ¿e to przez to ¿e jakby MoveLeft/Right ca³y czas sie wywo³ywa³o
+    public string[] canMoveDown = new string[] { "Dirt", "Rock", "Player", "Coin", "Border" };
 
     void Start()
     {
@@ -25,18 +20,16 @@ public class RockBehavior : MonoBehaviour
 
     void Awake()
     {
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
-        playerMovment = GameObject.Find("Player").GetComponent<PlayerMovment>();
+        //isMovingDown = true;
         isRockOrCoinDown = false;
     }
 
-    void Update() // dorobiæ to ¿e jesli po ukosie coœ stoi to siê nie œlizga, i jeœli pod nim jest kamieñ, ale z dwóch stron blokuje to nie spada
+    void Update() //ogarn¹æ te przemieszczanie, ¿eby nie sprawdza³ pozycji co klatke, tylko gdy ju¿ jest na pozycji to nie sprawdza, sprawdza dopiero w momencie gdy chcemy ¿eby kamieñ siê przesuwa³
     {
         transform.position = Vector3.MoveTowards(transform.position, rockMovePoint.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, rockMovePoint.position) == 0)
+        if (Vector3.Distance(transform.position, rockMovePoint.position) <= .05f)
         {
-
             if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, 0f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
                 canMoveLeft = true;
             else
@@ -47,52 +40,80 @@ public class RockBehavior : MonoBehaviour
             else
                 canMoveRight = false;
 
-            if (Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, coinOrRockLayer))
+            if (Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, rockLayer))
             {
-                if (canMoveLeft)
+                if (canMoveLeft && canMoveRight)
                 {
-                    Debug.Log(Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, 0f, 0f), .2f, LayerMask.GetMask(canMoveSide)));
-                    MoveLeft();
+                    if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                    {
+                        Debug.Log("Lewa wolna");
+                        MoveLeft();
+                    }
+                    else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                        MoveRight();
                 }
-                if (canMoveRight)
+                else
                 {
-                    Debug.Log(Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, 0f, 0f), .2f, LayerMask.GetMask(canMoveSide)));
-                    MoveRight();
+                    if (canMoveLeft)
+                    {
+                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                        {
+                            Debug.Log(Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide))); //przy pchaniu kamienia, jeœli jest on na kamieniu, to po skosie wykrywa null
+                            MoveLeft();
+                        }
+                    }
+                    else if (canMoveRight)
+                    {
+                        if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(canMoveSide)))
+                            MoveRight();
+                    }
                 }
             }
 
-            if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(canMoveDown)))
+            else if (!Physics2D.OverlapCircle(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(canMoveDown)))
                 MoveDown();
-        }
 
+            else
+                isMovingDown = false;
+
+        }
     }
 
     public void MoveLeft()
     {
         rockMovePoint.position += new Vector3(-1f, 0f, 0f);
-        Debug.Log("Kamieñ w lewo");
+        //Debug.Log("Kamieñ w lewo");
     }
 
     public void MoveRight()
     {
         rockMovePoint.position += new Vector3(1f, 0f, 0f);
-        Debug.Log("Kamieñ w prawo");
+        //Debug.Log("Kamieñ w prawo");
     }
 
     public void MoveDown()
     {
         rockMovePoint.position += new Vector3(0f, -1f, 0f);
-        Debug.Log("Kamieñ w dó³");
+        isMovingDown = true;
+        //Debug.Log("Kamieñ w dó³");
     }
+
+    /*IEnumerator WaitToRockFall()
+    {
+        Debug.Log("Czekaj");
+        yield return new WaitForSeconds(2f);
+    }*/
 
     private void OnDrawGizmos()
     {
-        /*Gizmos.color = Color.black;
-        Gizmos.DrawSphere(transform.position + new Vector3(0f, -1f, 0f), .2f);*/
+        /*Gizmos.color = Color.red;
+        Gizmos.DrawSphere(rockMovePoint.position + new Vector3(-1f, -1f, 0f), .2f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(rockMovePoint.position + new Vector3(1f, -1f, 0f), .2f);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(rockMovePoint.position + new Vector3(0f, -1f, 0f), .2f);*/
         /*Gizmos.color = Color.red;
         Gizmos.DrawSphere(rockMovePoint.position, .2f);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(rockMovePoint.position + new Vector3(-1f, 0f, 0f), .2f);
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(rockMovePoint.position + new Vector3(1f, 0f, 0f), .2f);*/
     }

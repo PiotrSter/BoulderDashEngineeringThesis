@@ -148,24 +148,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orginalPosition: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  timeToMove: 0.2
   moveSpeed: 3
   isRockOrCoinDown: 0
   canMoveLeft: 0
   canMoveRight: 0
+  isMoving: 0
   rockMovePoint: {fileID: 3675400993094692827}
-  coinOrRockLayer:
+  rockLayer:
     serializedVersion: 2
     m_Bits: 256
-  dirtLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  borderLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 512
   canMoveSide:
   - RockOrCoin
   - Dirt
@@ -174,8 +165,6 @@ MonoBehaviour:
   canMoveDown:
   - Dirt
   - Border
-  movement: {x: 0, y: 0}
-  playerMovment: {fileID: 0}
 --- !u!1 &2886030816350260024
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +177,7 @@ GameObject:
   m_Layer: 0
   m_Name: RockMovmentPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
