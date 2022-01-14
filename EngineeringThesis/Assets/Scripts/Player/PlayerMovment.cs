@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
-    public bool canMoveDown, canMoveUp;
+    public bool canMoveHorizontal, canMoveVertical;
     public Vector3 orginalPosition, targetPosition;
     public float moveSpeed = 3f;
     public Transform movePoint;
     public RockBehavior rockHorizontal;
     public Animator animator;
     public LayerMask whatStopedMovment, rockLayer;
+    GameManager gm;
 
     void Start()
     {
@@ -20,6 +21,9 @@ public class PlayerMovment : MonoBehaviour
     void Awake()
     {
         animator = this.gameObject.GetComponent<Animator>();
+        canMoveHorizontal = true;
+        canMoveVertical = true;
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -32,11 +36,11 @@ public class PlayerMovment : MonoBehaviour
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
-                {                 
+                {
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                 }
 
-                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer)) 
+                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
                 {
                     rockHorizontal = Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer).GetComponent<RockBehavior>(); //tutaj nie wiem czy nie trzeba tego przerobiæ, ¿eby GetComponent nie by³o w update
                     if (Input.GetAxisRaw("Horizontal") == -1 && rockHorizontal.canMoveLeft)
@@ -50,14 +54,22 @@ public class PlayerMovment : MonoBehaviour
                         movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                     }
                 }
+
+                else
+                    canMoveHorizontal = false;
             }
             else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, rockLayer))
                     movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                else
+                    canMoveVertical = false;
             }
 
         }
+
+        if (!canMoveHorizontal && !canMoveVertical)
+            gm.gameOver = true;
 
         animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal")); //animator nie dzia³a :(
         animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
