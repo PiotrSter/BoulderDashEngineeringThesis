@@ -18,7 +18,7 @@ public class DirtBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Player")
+        if (collision.CompareTag("Player"))
             Destroy(this.gameObject);
     }
 }

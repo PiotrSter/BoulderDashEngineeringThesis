@@ -24,6 +24,7 @@ public class PlayerMovment : MonoBehaviour
         canMoveHorizontal = true;
         canMoveVertical = true;
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        this.transform.position = new Vector3(gm.startX + 1f, gm.startY - 1f, this.transform.position.z);
     }
 
     void Update()

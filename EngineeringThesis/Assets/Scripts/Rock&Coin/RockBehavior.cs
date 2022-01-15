@@ -10,7 +10,7 @@ public class RockBehavior : RockAndCoinClass
         if (collision.collider.name == "Player")
         {
             isMovingDown = false;
-            gm.gameOver = false; //odpala sie gameover i nie zwraca false
+            gm.gameOver = false; 
             objectMovePoint.position += new Vector3(0f, 1f, 0f); /*Dzia³a jako tako, nie jest idealnie, ale chocia¿ nie spada*/            
         }
     }

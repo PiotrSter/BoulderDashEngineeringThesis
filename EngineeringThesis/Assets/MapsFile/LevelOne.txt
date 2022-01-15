@@ -1,0 +1,16 @@
+b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+b,x,d,d,d,d,d,d,d,d,d,r,c,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,r,r,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,r,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,r,r,r,r,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,r,d,d,d,d,d,r,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,r,r,r,r,r,r,r,d,d,d,d,d,d,d,d,c,r,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,c,d,d,d,d,d,d,d,d,r,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,b
+b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b

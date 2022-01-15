@@ -47,16 +47,6 @@ public class RockAndCoinClass : MonoBehaviour
             {
                 if (objectVertical == null)
                     objectVertical = Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(rockAndCoinLayers)).GetComponent<RockAndCoinClass>();
-                /*if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(rockAndCoinLayers)).CompareTag("Rock"))
-                {
-                    Debug.Log(Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(rockAndCoinLayers)).CompareTag("Rock"));
-                    rockVertical = Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, rockLayer).GetComponent<RockBehavior>();
-                }
-                else if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(rockAndCoinLayers)).CompareTag("Coin"))
-                {
-                    Debug.Log(Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(rockAndCoinLayers)).name);
-                    coinVertical = Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, coinLayer).GetComponent<CoinBehavior>();
-                }*/
 
                 if (canMoveLeft && canMoveRight && !objectVertical.isMovingDown)
                 {
@@ -66,7 +56,10 @@ public class RockAndCoinClass : MonoBehaviour
                         MoveLeft();
                     }
                     else if (!Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
+                    {
+                        Debug.Log(Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(1f, -1f, 0f), .2f, LayerMask.GetMask(layers)));
                         MoveRight();
+                    }
                 }
                 else
                 {
@@ -85,16 +78,6 @@ public class RockAndCoinClass : MonoBehaviour
                     }
                 }
             }
-
-            /* else if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask("Dirt")))
-             {
-                 isDirt = true;
-             }
-
-             else if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, playerLayer))
-             {
-                 isDirt = false;
-             }*/
 
             else if (!Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
             {
@@ -137,18 +120,6 @@ public class RockAndCoinClass : MonoBehaviour
         isMovingDown = true;
         //Debug.Log("Kamieñ w dó³");
     }
-
-    /*IEnumerator WaitToRockFall()
-    {
-        while (isMovingDown)
-        {
-            yield return new WaitForSeconds(.3f);
-            MoveDown();
-            Debug.Log("Czekaj");
-            if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
-                isMovingDown = false;
-        }
-    }*/
 
     /*private void OnDrawGizmos()
     {
