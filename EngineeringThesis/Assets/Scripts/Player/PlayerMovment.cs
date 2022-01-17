@@ -72,8 +72,8 @@ public class PlayerMovment : MonoBehaviour
         if (!canMoveHorizontal && !canMoveVertical)
             gm.gameOver = true;
 
-        animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal")); //animator nie dzia³a :(
-        animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("Horizontal", Mathf.Abs(Input.GetAxisRaw("Horizontal"))); //animator nie dzia³a :(
+        animator.SetFloat("Vertical", Mathf.Abs(Input.GetAxisRaw("Vertical")));
     }
 
     private void OnDrawGizmos()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int howManyCoin;
-    public bool gameOver;
+    public bool gameOver, isLevelEnd;
     public float startX, startY, finishX, finishY;
     void Awake()
     {
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (howManyCoin == 0)
+            isLevelEnd = true;
     }
 }
