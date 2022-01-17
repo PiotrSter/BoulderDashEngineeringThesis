@@ -72,7 +72,7 @@ public class MapLoader : MonoBehaviour
             return tabMapGameObject[2];
         else if (symbol == "c")
         {
-            gm.howManyCoin++;
+            gm.howManyCoins++;
             return tabMapGameObject[3];
         }
         else

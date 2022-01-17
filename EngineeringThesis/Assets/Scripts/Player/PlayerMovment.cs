@@ -29,51 +29,47 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
+        if (!gm.gameOver && !gm.isLevelEnd)
         {
-            //Debug.Log("Gracz");
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, movePoint.position) <= .05f)
             {
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
                 {
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                }
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
+                        movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
 
-                else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
+                    else if (Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer))
+                    {
+                        rockHorizontal = Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer).GetComponent<RockBehavior>();
+                        if (Input.GetAxisRaw("Horizontal") == -1 && rockHorizontal.canMoveLeft)
+                        {
+                            rockHorizontal.MoveLeft();
+                            movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                        }
+                        else if (Input.GetAxisRaw("Horizontal") == 1 && rockHorizontal.canMoveRight)
+                        {
+                            rockHorizontal.MoveRight();
+                            movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                        }
+                    }
+
+                    else
+                        canMoveHorizontal = false;
+                }
+                else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
                 {
-                    rockHorizontal = Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, rockLayer).GetComponent<RockBehavior>(); //tutaj nie wiem czy nie trzeba tego przerobiæ, ¿eby GetComponent nie by³o w update
-                    if (Input.GetAxisRaw("Horizontal") == -1 && rockHorizontal.canMoveLeft)
-                    {
-                        rockHorizontal.MoveLeft();
-                        movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                    }
-                    else if (Input.GetAxisRaw("Horizontal") == 1 && rockHorizontal.canMoveRight)
-                    {
-                        rockHorizontal.MoveRight();
-                        movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                    }
+                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, rockLayer))
+                        movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                    else
+                        canMoveVertical = false;
                 }
-
-                else
-                    canMoveHorizontal = false;
-            }
-            else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
-            {
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopedMovment) && !Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, rockLayer))
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-                else
-                    canMoveVertical = false;
             }
 
+            if (!canMoveHorizontal && !canMoveVertical)
+                gm.gameOver = true;   
         }
-
-        if (!canMoveHorizontal && !canMoveVertical)
-            gm.gameOver = true;
-
-        animator.SetFloat("Horizontal", Mathf.Abs(Input.GetAxisRaw("Horizontal"))); //animator nie dzia³a :(
-        animator.SetFloat("Vertical", Mathf.Abs(Input.GetAxisRaw("Vertical")));
     }
 
     private void OnDrawGizmos()

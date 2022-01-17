@@ -8,7 +8,7 @@ public class CoinBehavior : RockAndCoinClass
     {
         if (collision.name == "Player")
         {
-            gm.howManyCoin--;
+            gm.howManyCoins--;
             this.objectMovePoint.parent = this.transform;
             Destroy(this.gameObject);
         }

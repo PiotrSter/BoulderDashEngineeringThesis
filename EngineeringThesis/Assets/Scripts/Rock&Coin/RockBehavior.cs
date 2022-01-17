@@ -11,7 +11,7 @@ public class RockBehavior : RockAndCoinClass
         {
             isMovingDown = false;
             gm.gameOver = false; 
-            objectMovePoint.position += new Vector3(0f, 1f, 0f); /*Dzia³a jako tako, nie jest idealnie, ale chocia¿ nie spada*/            
+            objectMovePoint.position += new Vector3(0f, 1f, 0f);            
         }
     }
 }
