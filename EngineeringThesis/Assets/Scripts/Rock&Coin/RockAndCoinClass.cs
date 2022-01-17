@@ -82,12 +82,6 @@ public class RockAndCoinClass : MonoBehaviour
             else if (!Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, LayerMask.GetMask(layers)))
             {
                 MoveDown();
-                /*if (!isDirt)
-                    MoveDown();
-                else
-                    isDirt = false;*/
-                /*isMovingDown = true;
-                StartCoroutine("WaitToRockFall");*/
             }
 
             else if (Physics2D.OverlapCircle(objectMovePoint.position + new Vector3(0f, -1f, 0f), .2f, playerLayer) && isMovingDown)

@@ -10,8 +10,7 @@ public class MapLoader : MonoBehaviour
     public char separator;
     public float startX, startY, finishX, finishY;
     public string[] tab;
-    public GameObject[] tabMapGameObject = new GameObject[5];
-    //public List<MapObjectClass> listMapObjectClasses = new List<MapObjectClass>();
+    public GameObject[] tabMapGameObject = new GameObject[4];
     public Transform map;
     GameManager gm;
 
@@ -76,8 +75,6 @@ public class MapLoader : MonoBehaviour
             gm.howManyCoin++;
             return tabMapGameObject[3];
         }
-        else if (symbol == "p")
-            return tabMapGameObject[4];
         else
             return null;
     }

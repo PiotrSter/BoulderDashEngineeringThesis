@@ -349,7 +349,6 @@ MonoBehaviour:
   - {fileID: 4262407124552895920, guid: 58d101f26aca9ca43bf7d1b44bbb24fe, type: 3}
   - {fileID: 1822562717647952027, guid: 07f1ce9c6d4e3bc41903800df97feb60, type: 3}
   - {fileID: 214884637268773897, guid: 8ae84c3b3da006545af1ab6c47a44fd3, type: 3}
-  - {fileID: 8007907250353225002, guid: 6a71c1d67b774784ca8b2825406dcfd5, type: 3}
   map: {fileID: 719789270}
 --- !u!4 &1180920496
 Transform:
@@ -396,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   howManyCoin: 0
   gameOver: 0
+  isLevelEnd: 0
   startX: -16
   startY: 8
   finishX: 16
