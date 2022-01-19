@@ -975,13 +975,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a66b4d134735fd47af2dbf2d223ce49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapFile: Assets\MapsFile\LevelOne.txt
+  mapFile: LevelOne.txt
+  path: 
   separator: 44
   startX: 0
   startY: 0
   finishX: 0
   finishY: 0
   tab: []
+  data:
+  - b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+  - b,x,d,d,d,d,d,d,d,d,d,r,c,d,d,d,d,r,d,r,r,r,d,d,d,d,d,d,d,d,d,b
+  - b,d,d,d,d,d,d,d,d,d,r,r,d,d,d,d,d,r,r,d,d,r,c,d,d,d,d,d,d,d,d,b
+  - b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,r,r,r,b
+  - b,d,d,d,d,d,d,d,d,d,d,d,r,d,d,r,d,d,r,d,d,d,d,d,d,d,d,r,r,c,r,b
+  - b,r,r,d,d,d,d,d,d,d,d,d,d,d,r,r,c,d,r,d,d,d,d,d,d,d,d,d,r,d,d,b
+  - b,r,r,c,d,d,d,d,d,d,d,d,d,d,d,r,r,r,r,d,d,d,d,d,d,d,d,d,d,d,d,b
+  - b,d,r,r,d,d,d,d,d,d,d,d,d,d,d,d,r,d,d,d,d,d,r,d,d,d,d,d,d,d,d,b
+  - b,d,d,d,d,d,r,r,r,r,r,d,d,d,d,d,d,d,d,d,d,c,r,d,d,d,d,d,d,d,d,b
+  - b,d,d,d,d,d,d,r,r,c,d,d,d,d,d,d,d,d,d,d,d,r,d,d,d,d,d,d,d,d,d,b
+  - b,d,d,d,d,d,d,d,r,r,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,r,r,r,r,b
+  - b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,r,r,r,b
+  - b,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,c,r,r,b
+  - b,d,r,d,r,d,d,r,r,r,r,d,d,d,d,d,d,r,r,r,d,d,d,d,d,d,d,d,d,d,d,b
+  - b,r,c,r,d,d,d,d,r,r,r,d,d,d,d,d,d,r,c,d,d,d,d,d,d,d,d,d,d,d,d,b
+  - b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
   tabMapGameObject:
   - {fileID: 5199120247029452158, guid: 574a15be5d8588948a3f38fa69a3a8d5, type: 3}
   - {fileID: 4262407124552895920, guid: 58d101f26aca9ca43bf7d1b44bbb24fe, type: 3}

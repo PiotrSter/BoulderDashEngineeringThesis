@@ -6,10 +6,10 @@ using System.IO;
 
 public class MapLoader : MonoBehaviour
 {
-    public string mapFile;
+    public string mapFile, path;
     public char separator;
     public float startX, startY, finishX, finishY;
-    public string[] tab;
+    public string[] tab, data;
     public GameObject[] tabMapGameObject = new GameObject[4];
     public Transform map;
     GameManager gm;
@@ -21,16 +21,30 @@ public class MapLoader : MonoBehaviour
         finishX = gm.finishX;
         startY = gm.startY;
         finishY = gm.finishY;
+        path = Application.persistentDataPath + "\\" + mapFile;
     }
 
     void Start()
     {
+        SaveMap();
         LoadMap();
+    }
+
+    void SaveMap()
+    {
+        if (!File.Exists(path))
+        {
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i < data.Length; i++)
+                    sw.WriteLine(data[i]);
+            }
+        }
     }
 
     void LoadMap()
     {
-        using (StreamReader sr = new StreamReader(mapFile))
+        using (StreamReader sr = new StreamReader(path))
         {
             float y = startY;
             while (!sr.EndOfStream)

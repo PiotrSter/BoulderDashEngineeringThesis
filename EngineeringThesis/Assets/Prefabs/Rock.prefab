@@ -174,8 +174,7 @@ MonoBehaviour:
   - Border
   gm: {fileID: 0}
   dirt: {fileID: 0}
-  rockVertical: {fileID: 0}
-  coinVertical: {fileID: 0}
+  objectVertical: {fileID: 0}
   rb: {fileID: 0}
 --- !u!1 &2886030816350260024
 GameObject:
