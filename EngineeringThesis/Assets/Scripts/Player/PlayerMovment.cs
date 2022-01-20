@@ -65,10 +65,7 @@ public class PlayerMovment : MonoBehaviour
                     else
                         canMoveVertical = false;
                 }
-            }
-
-            if (!canMoveHorizontal && !canMoveVertical)
-                gm.gameOver = true;   
+            } 
         }
     }
 
