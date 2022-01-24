@@ -7,10 +7,16 @@ public class Pause : MonoBehaviour
 {
     public GameObject pausePanel;
     public float tempTimeScale;
+    GameManager gm;
+
+    void Awake()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !gm.gameOver && !gm.isLevelEnd)
         {
             if (Time.timeScale != 0)
                 tempTimeScale = Time.timeScale;

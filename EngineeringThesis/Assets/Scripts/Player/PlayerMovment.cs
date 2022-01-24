@@ -68,12 +68,4 @@ public class PlayerMovment : MonoBehaviour
             } 
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f);
-        Gizmos.color = Color.white;
-        Gizmos.DrawSphere(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f);
-    }
 }
